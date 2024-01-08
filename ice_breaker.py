@@ -2,6 +2,10 @@ from langchain import PromptTemplate
 from langchain.chat_models import ChatOpenAI
 from langchain.chains import LLMChain
 
+from third_parties.linkedin import scrape_linkedin_profile
+from agents.linkedin_lookup_agent import lookup as linkedin_lookup_agent
+
+
 def load_summary_template(summary_path:str) -> str:
     with open(summary_path, 'r') as f:
         summary_raw = f.readlines()
@@ -23,6 +27,6 @@ def summary_by_llm_dosent(information):
     return result
 
 if __name__ == "__main__":
-    from third_parties.linkedin import scrape_linkedin_profile
-    information = scrape_linkedin_profile()
-    print(summary_by_llm_dosent(information))
+    linkedin_profile_url = linkedin_lookup_agent(name="Eden Marco") # 이름에 힌트를 추가하면 조금 더 잘나온다~
+    information = scrape_linkedin_profile(linkedin_profile_url) # 링크만 남기는 방법..?
+    print(summary_by_llm_dosent(information)) 

@@ -7,7 +7,7 @@ def load_linkedin_profile():
     
     return sample_linkedin
 
-def scrape_linkedin_profile():#linkedin_profile_url:str):
+def scrape_linkedin_profile(linkedin_profile_url:str):
     sample_raw = load_linkedin_profile()
     
     data = {
